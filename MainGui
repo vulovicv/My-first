@@ -1,0 +1,205 @@
+package vule;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.math.*;
+
+import javax.swing.*;
+
+import java.util.*;
+
+import javax.script.*;
+public class MainGui extends JFrame {
+
+	public JButton clear,tacka,jednako,one,two,three,four,five,six,seven,eight,nine,zero,plus,minus,deljenje,mnozenje;
+	private JTextField rez;
+	
+	
+	public MainGui()
+	{
+		
+		JFrame frame = new JFrame("Calculator");
+		frame.setTitle("Calculator");
+		frame.setSize(300, 150);
+		JPanel buttonpanel = new JPanel(new GridLayout(4,4));
+		
+		rez = new JTextField ();
+		frame.add(rez,BorderLayout.NORTH);
+		clear = new JButton ("C");
+		frame.add(clear,BorderLayout.WEST);
+		
+		tacka = new JButton (".");
+		one = new JButton("1");
+		two = new JButton("2");
+		three = new JButton ("3");
+		four = new JButton ("4");
+		five = new JButton ("5");
+		six = new JButton ("6");
+		seven = new JButton ("7");
+		eight = new JButton ("8");
+		nine = new JButton ("9");
+		plus = new JButton ("+");
+		minus = new JButton ("-");
+		deljenje = new JButton ("/");
+		mnozenje = new JButton ("*");
+		zero = new JButton ("0");
+		jednako = new JButton ("=");
+	
+		
+		
+	    
+	    
+		buttonpanel.add(seven);
+		buttonpanel.add(eight);
+		buttonpanel.add(nine);
+		buttonpanel.add(deljenje);
+		buttonpanel.add(four);
+		buttonpanel.add(five);
+		buttonpanel.add(six);
+		buttonpanel.add(mnozenje);
+		buttonpanel.add(one);
+		buttonpanel.add(two);
+		buttonpanel.add(three);
+		buttonpanel.add(minus);
+		buttonpanel.add(tacka);
+		buttonpanel.add(zero);
+		buttonpanel.add(jednako);
+		buttonpanel.add(plus);
+		
+		
+		frame.add(buttonpanel);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+		
+		thehandler handler = new thehandler ();
+		one.addActionListener(handler);
+		two.addActionListener(handler);
+		three.addActionListener(handler);
+		four.addActionListener(handler);
+		five.addActionListener(handler);
+		six.addActionListener(handler);
+		seven.addActionListener(handler);
+		eight.addActionListener(handler);
+		nine.addActionListener(handler);
+		zero.addActionListener(handler);
+		tacka.addActionListener(handler);
+		plus.addActionListener(handler);
+		mnozenje.addActionListener(handler);
+		deljenje.addActionListener(handler);
+		jednako.addActionListener(handler);
+		minus.addActionListener(handler);
+		clear.addActionListener(handler);
+		
+	}
+	
+	public class thehandler implements ActionListener
+	{
+		public void actionPerformed(ActionEvent event)
+		{	
+			
+			
+			String txt = rez.getText();
+			if (event.getSource() == one)
+			{	String jedan = "1";
+				rez.setText(txt + jedan);
+			}
+			
+			if (event.getSource()== two)
+			{
+				String dva = "2";
+				rez.setText(txt + dva);
+			}
+			
+			if (event.getSource()==three)
+			{
+				String tri = "3";
+				rez.setText(txt+tri);
+			}
+			if (event.getSource()==four)
+			{
+				String cetiri = "4";
+				rez.setText(txt+cetiri);
+			}
+			if (event.getSource()==five)
+			{
+				String pet = "5";
+				rez.setText(txt + pet);
+			}
+			if (event.getSource()==six)
+			{
+				String sest = "6";
+				rez.setText(txt + sest);
+			}
+			if (event.getSource()==seven)
+			{
+				String sedam = "7";
+				rez.setText(txt + sedam);
+			}
+			if(event.getSource()==eight)
+			{
+				String osam = "8";
+				rez.setText(txt + osam);
+			}
+			if (event.getSource()==nine)
+			{
+				String devet = "9";
+				rez.setText(txt + devet);
+			}
+			if (event.getSource()==plus)
+			{
+				String add = " + ";
+				rez.setText(txt + add);
+			}
+			if (event.getSource()==minus)
+			{
+				String oduzmi = " - ";
+				rez.setText(txt + oduzmi);
+			}
+			if (event.getSource()==mnozenje)
+			{
+				String mnozi = " * ";
+				rez.setText(txt + mnozi);
+			}
+			if (event.getSource()==deljenje)
+			{
+				String deli = " / ";
+				rez.setText(txt + deli);
+			}
+			if (event.getSource()==zero)
+			{
+				String nula = "0";
+				rez.setText(txt + nula);
+			}
+			if (event.getSource()==tacka)
+			{
+				String dot = ".";
+				rez.setText(txt + dot);
+			}
+			if (event.getSource()==jednako)
+			{
+				
+				String jednak = " = ";
+				ScriptEngineManager mgr = new ScriptEngineManager();
+			    ScriptEngine engine = mgr.getEngineByName("JavaScript");
+			    try {
+					System.out.println();
+					rez.setText(txt + jednak + engine.eval(txt));
+					
+				} catch (ScriptException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				    
+				
+				
+			}
+			
+			if (event.getSource()== clear)
+			{	txt = null;
+				rez.setText(txt);
+			}
+		}
+	}
+	
+	
+}
